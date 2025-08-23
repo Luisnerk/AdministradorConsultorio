@@ -28,6 +28,15 @@ public class PatientController : BaseApiController
     public async Task<IEnumerable<PatientDto>> GetAll()
     {
         var patients = await _unitOfWork.Patients.GetAll();
-        return _mapper.Map<List<PatientDto>>(patients);
+        var mappedPatients = _mapper.Map<List<PatientDto>>(patients);
+        return mappedPatients;
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<PatientDto>> GetById(int id)
+    {
+        var patient = await _unitOfWork.Patients.GetById(id);
+        var patientDto = _mapper.Map<PatientDto>(patient);
+        return patientDto;
     }
 }

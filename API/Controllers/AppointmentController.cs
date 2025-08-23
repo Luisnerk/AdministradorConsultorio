@@ -1,6 +1,30 @@
 
+using API.Dto;
+using API.Entities;
+using API.Interfaces;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+
 namespace API.Controllers;
-public class AppointmentController
+
+public class AppointmentController : BaseApiController
 {
-    
+    public AppointmentController(IMapper mapper, IUnitOfWork unitOfWork) : base(mapper, unitOfWork) { }
+
+    [HttpPost("register")]
+    public async Task<ActionResult<Appointment>> Register(AppointmentRegisterDto registerDto)
+    {
+        var appointment = _mapper.Map<Appointment>(registerDto);
+        _unitOfWork.Appointment.Add(appointment);
+        await _unitOfWork.SaveAsync();
+        return appointment;
+    }
+
+    [HttpGet("all")]
+    public async Task<ActionResult<List<AppointmentListDto>>> GetAll()
+    {
+        var appointments = await _unitOfWork.Appointment.GetAll();
+        var appointmentsDto = _mapper.Map<List<AppointmentListDto>>(appointments);
+        return appointmentsDto;
+    }
 }

@@ -37,6 +37,28 @@ namespace API.Data.Migrations
                     b.ToTable("AppUsers");
                 });
 
+            modelBuilder.Entity("API.Entities.Appointment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DateAndTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DurationMinutes")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Appointment");
+                });
+
             modelBuilder.Entity("API.Entities.Patient", b =>
                 {
                     b.Property<int>("Id")
@@ -52,6 +74,17 @@ namespace API.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Patients");
+                });
+
+            modelBuilder.Entity("API.Entities.Appointment", b =>
+                {
+                    b.HasOne("API.Entities.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
                 });
 #pragma warning restore 612, 618
         }

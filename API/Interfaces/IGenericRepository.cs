@@ -7,4 +7,5 @@ public interface IGenericRepository<T> where T : GenericEntity
 {
     void Add(T entity);
     Task<IEnumerable<T>> GetAll();
+    Task<T> GetById(int id);
 }

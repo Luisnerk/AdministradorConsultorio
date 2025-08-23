@@ -3,7 +3,7 @@ namespace API.Dto;
 
 public class PatientDto
 {
-    public int id { get; }
+    public int Id { get; set; }
     public string Name { get; set; }
     public int Age { get; set; }
 }

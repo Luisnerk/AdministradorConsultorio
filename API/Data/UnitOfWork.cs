@@ -1,4 +1,5 @@
 
+using API.Entities;
 using API.Interfaces;
 using API.Repositories;
 
@@ -9,6 +10,7 @@ public class UnitOfWork : IUnitOfWork
     DataContext _context;
     IUserRepository _users;
     IPatientRepository _patients;
+    IAppointmentRepository _appointment;
 
     public UnitOfWork(DataContext context)
     {
@@ -36,6 +38,18 @@ public class UnitOfWork : IUnitOfWork
                 _patients = new PatientRepository(_context);
             }
             return _patients;
+        }
+    }
+
+    public IAppointmentRepository Appointment
+    {
+        get
+        {
+            if (_appointment == null)
+            {
+                _appointment = new AppointmentRepository(_context);
+            }
+            return _appointment;
         }
     }
 

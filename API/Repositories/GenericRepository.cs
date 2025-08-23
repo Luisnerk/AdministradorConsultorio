@@ -2,6 +2,7 @@
 using API.Data;
 using API.Entities;
 using API.Interfaces;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
 
@@ -17,6 +18,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : GenericEntit
     public virtual void Add(T entity)
     {
         _context.Set<T>().Add(entity);
+    }
+
+    public virtual async Task<T> GetById(int id)
+    {
+        return await _context.Set<T>().FindAsync(id);
     }
 
     public virtual async Task<IEnumerable<T>> GetAll()
