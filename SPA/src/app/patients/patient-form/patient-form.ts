@@ -38,4 +38,9 @@ export class PatientForm {
     this.registerForm.reset();
     this.patientService.getPatients();
   }
+
+  resetForm() {
+    console.log("aaaa")
+    this.registerForm.reset();
+  }
 }

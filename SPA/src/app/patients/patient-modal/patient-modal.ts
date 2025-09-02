@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { PatientForm } from "../patient-form/patient-form";
 
 @Component({
@@ -8,5 +8,9 @@ import { PatientForm } from "../patient-form/patient-form";
   styleUrl: './patient-modal.css'
 })
 export class PatientModal {
+  @ViewChild(PatientForm) formComponent!: PatientForm;
 
+  resetForm() {
+    this.formComponent.resetForm();
+  }
 }

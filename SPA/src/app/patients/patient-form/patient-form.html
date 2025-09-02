@@ -9,6 +9,9 @@
             <input type="date" class="form-control" id="bornDateInput" formControlName="dateOfBirth">
         </div>
         <br>
-        <button type="submit" class="btn btn-primary" data-bs-toggle="modal">Guardar</button>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" data-bs-toggle="modal">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetForm()">Cancelar</button>
+        </div>
     </fieldset>
 </form>
