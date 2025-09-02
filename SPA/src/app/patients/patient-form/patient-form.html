@@ -1,0 +1,14 @@
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+    <fieldset>
+        <div>
+            <label for="name" class="form-label mt-4">Nombre</label>
+            <input type="text" class="form-control" id="nameInput" formControlName="name">
+        </div>
+        <div>
+            <label for="dateOfBirth" class="form-label mt-4">Fecha de nacimiento</label>
+            <input type="date" class="form-control" id="bornDateInput" formControlName="dateOfBirth">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary" data-bs-toggle="modal">Guardar</button>
+    </fieldset>
+</form>
