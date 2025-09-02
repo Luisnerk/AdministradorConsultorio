@@ -1,0 +1,25 @@
+<div class="content">
+  <button type="button" class="btn btn-success">Agregar</button>
+  <div class="center">
+    <table class="table table-hover">
+      <thead>
+        <tr class="table-primary">
+          <th>Paciente</th>
+          <th>Edad</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (patient of patients; track patient.id) {
+        <tr>
+          <td>
+            {{ patient.name }}
+          </td>
+          <td>
+            {{ patient.age }}
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

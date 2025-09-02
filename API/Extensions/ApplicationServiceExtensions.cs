@@ -16,7 +16,16 @@ public static class ApplicationServiceExtensions
             options.UseSqlite(iConfig.GetConnectionString("DefaultConnection"));
         });
         services.AddAutoMapper(Assembly.GetEntryAssembly());
-        services.AddCors();
+        services.AddCors(options =>
+        {
+            options.AddPolicy(name: "CORS_1",
+            policy =>
+            {
+                policy.WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+            });
+        });
         services.AddControllers();
 
         services.AddScoped<ITokenService, TokenService>();

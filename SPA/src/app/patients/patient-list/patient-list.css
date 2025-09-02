@@ -1,0 +1,22 @@
+.content{
+     margin: 20px;
+}
+
+.center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.table {
+    margin-top: 20px;
+    max-width: 80%;
+    align-self: center;
+}
+tr:nth-child(even){
+  background-color: black;
+}
+
+tbody tr:nth-child(odd){
+  background-color: #ffffff;
+}

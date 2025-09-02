@@ -11,6 +11,8 @@ builder.Services.AddApplicationServices(iConfig: builder.Configuration);
 
 var app = builder.Build();
 
+app.UseCors("CORS_1");
+
 // Mapear controladores
 app.MapControllers();
 

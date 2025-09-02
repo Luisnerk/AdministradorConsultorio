@@ -8,6 +8,7 @@ import { Nav } from "./nav/nav";
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
+
 export class App {
   protected readonly title = signal('SPA');
 }
