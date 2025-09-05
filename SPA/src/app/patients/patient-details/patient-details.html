@@ -1,0 +1,24 @@
+
+<div class="center">
+    <div class="card" style="padding: 15px; padding-left: 30px; padding-right: 30px;">
+        <div class="card-body">
+            <h3 class="card-title text-center">{{patient.name}}</h3>
+            @if (!editMode) {
+                <div class="mt-4">
+                    <span class="fw-bold">Edad: </span>{{patient.age}}
+                </div>            
+                <div class="mt-4">
+                    <span class="fw-bold">Fecha de Nacimiento: </span>{{patient.dateOfBirth}}
+                </div>
+                <br>
+                <div class="center">
+                    <a class="btn btn-primary text-end" (click)="changeMode()">Editar información</a>
+                    <button class="btn btn-danger text-end">Eliminar</button>
+                </div>
+            }
+            @else {
+                <app-patient-update-form [patient]="patient" (toggleEdit)="changeMode()" (reloadPatient)="loadPatient()"/>
+            }
+        </div>
+    </div>
+</div>

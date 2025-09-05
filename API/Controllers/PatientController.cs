@@ -39,4 +39,12 @@ public class PatientController : BaseApiController
         var patientDto = _mapper.Map<PatientDto>(patient);
         return patientDto;
     }
+
+    [HttpPatch]
+    public void Update(PatientAddUpdateDto patientUpdate)
+    {
+        Patient patient = _mapper.Map<Patient>(patientUpdate);
+        _unitOfWork.Patients.Update(patient);
+        _unitOfWork.SaveAsync();
+    }
 }

@@ -23,8 +23,17 @@ export class PatientService {
     this.formSubmitSubject.next();
   }
 
+  getPatient(id: number): Observable<Patient> {
+    return this.http.get<Patient>(this.baseUrl + `Patient/${id}`)
+  }
+
   getPatients(): Observable<Patient[]> {
     return this.http.get<Patient[]>(this.baseUrl + "Patient/all");
+  }
+
+  updatePatient(model: any): Observable<any> {
+    console.log(model);
+    return this.http.patch(this.baseUrl + "Patient", model, {observe: 'response'});
   }
 
   register(model: any) {

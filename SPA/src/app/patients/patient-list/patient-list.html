@@ -12,7 +12,7 @@
       </thead>
       <tbody>
         @for (patient of patients; track patient.id) {
-        <tr>
+        <tr (click)="onRowClick(patient.id)">
           <td>
             {{ patient.name }}
           </td>

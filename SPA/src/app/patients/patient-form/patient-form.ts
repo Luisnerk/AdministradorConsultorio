@@ -40,7 +40,6 @@ export class PatientForm {
   }
 
   resetForm() {
-    console.log("aaaa")
     this.registerForm.reset();
   }
 }

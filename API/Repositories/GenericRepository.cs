@@ -19,6 +19,10 @@ public class GenericRepository<T> : IGenericRepository<T> where T : GenericEntit
     {
         _context.Set<T>().Add(entity);
     }
+    public virtual void Update(T entity)
+    {
+        _context.Set<T>().Update(entity);
+    }
 
     public virtual async Task<T> GetById(int id)
     {
