@@ -47,4 +47,12 @@ public class PatientController : BaseApiController
         _unitOfWork.Patients.Update(patient);
         _unitOfWork.SaveAsync();
     }
+
+    [HttpDelete]
+    public void Delete(PatientAddUpdateDto patientDelete)
+    {
+        Patient patient = _mapper.Map<Patient>(patientDelete);
+        _unitOfWork.Patients.Delete(patient);
+        _unitOfWork.SaveAsync();
+    }
 }

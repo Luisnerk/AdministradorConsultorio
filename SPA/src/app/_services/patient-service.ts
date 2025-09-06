@@ -32,11 +32,16 @@ export class PatientService {
   }
 
   updatePatient(model: any): Observable<any> {
-    console.log(model);
     return this.http.patch(this.baseUrl + "Patient", model, {observe: 'response'});
+  }
+
+  deletePatient(model: any): Observable<any> {
+    console.log(model);
+    return this.http.delete(this.baseUrl + "Patient", {body: model});
   }
 
   register(model: any) {
     return this.http.post<Patient>(this.baseUrl + "Patient/add", model);
   }
+
 }
