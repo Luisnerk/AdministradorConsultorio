@@ -48,7 +48,7 @@
               <a class="dropdown-item" href="#">Another action</a>
               <a class="dropdown-item" href="#">Something else here</a>
               <div class="dropdown-divider"></div>
-              <Button type="button" class="btn dropdown-item">Cerrar Sesión</Button>
+              <Button type="button" class="btn dropdown-item" (click)="logout()">Cerrar Sesión</Button>
             </div>
           </li>
         </ul>
@@ -63,7 +63,7 @@
       <form action="" #loginForm="ngForm" (ngSubmit)="login()">
         <input [(ngModel)]="model.username" name="username" type="text" class="me-sm-2" placeholder="Usuario">
         <input [(ngModel)]="model.password" name="password" type="password" class="me-sm-2" placeholder="Contraseña">
-        <button class="btn btn-secondary my-2 my-sm-0">Iniciar sesión</button>
+        <button type="submit" class="btn btn-secondary my-2 my-sm-0">Iniciar sesión</button>
       </form>
     }
   </div>

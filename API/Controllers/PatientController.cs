@@ -7,6 +7,7 @@ using API.Dto;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -23,7 +24,7 @@ public class PatientController : BaseApiController
         _unitOfWork.SaveAsync();
         return patient;
     }
-
+    [Authorize]
     [HttpGet("all")]
     public async Task<IEnumerable<PatientDto>> GetAll()
     {

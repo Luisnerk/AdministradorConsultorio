@@ -22,4 +22,9 @@ export class Nav {
       error: error => console.log("error")
     });
   }
+
+  logout() {
+    this.accountService.logout();
+    this.router.navigateByUrl("/");
+  }
 }

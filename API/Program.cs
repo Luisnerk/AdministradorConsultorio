@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices(iConfig: builder.Configuration);
+builder.Services.AddIdentityServices(config: builder.Configuration);
 
 var app = builder.Build();
 
