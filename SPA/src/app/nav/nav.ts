@@ -3,6 +3,7 @@ import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AccountService } from '../_services/account-service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
@@ -14,12 +15,20 @@ import { FormsModule } from '@angular/forms';
 export class Nav {
   model: any = {};
 
-  constructor (public accountService: AccountService, private router: Router) {}
+  constructor (public accountService: AccountService, private router: Router, private toastr: ToastrService) {}
 
   login() {
     this.accountService.login(this.model).subscribe({
-      next: _ => this.router.navigateByUrl("/patients"),
-      error: error => console.log("error")
+      next: _ => {
+        this.model.password = "";
+        this.model.username = "";
+        this.router.navigateByUrl("/patients");
+      },
+      error: error => {
+        this.toastr.error("Credenciales inválidas", "Error");
+        this.model.password = "";
+        console.log("error");
+      }
     });
   }
 

@@ -1,0 +1,7 @@
+<div class="center appointment-list-container">
+    <div style="min-width: 100%;">
+        @for (appointment of appointments; track appointment.id) {
+            <app-appointment-container [appointment]="appointment" style="min-width: 100%;"></app-appointment-container>
+        }
+    </div>
+</div>

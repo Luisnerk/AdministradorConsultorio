@@ -1,0 +1,14 @@
+
+.appointment-container {
+    display: flex;
+    justify-content: space-around;
+    background-color:rgb(111, 111, 198);
+    line-height: 30px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+}
+.name {
+    width: 40%;
+}

@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="#" style="min-height: 100%; min-width: 30px; padding: 0px">
       <svg viewBox="0 0 25 25" style="color: white">
-        <use href="assets/favicon.svg" height="100%" width="auto"></use>
+        <use href="assets/favicon.svg" height="100%"></use>
       </svg>
     </a>
     @if ((accountService.currentUser$ | async); as user) {
@@ -29,7 +29,7 @@
             <a class="nav-link" routerLink="patients">Pacientes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
+            <a class="nav-link" routerLink="appointments">Citas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">About</a>
