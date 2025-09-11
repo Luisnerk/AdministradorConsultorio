@@ -27,4 +27,12 @@ public class AppointmentController : BaseApiController
         var appointmentsDto = _mapper.Map<List<AppointmentListDto>>(appointments);
         return appointmentsDto;
     }
+
+    [HttpGet("byDate")]
+    public async Task<ActionResult<List<AppointmentListDto>>> GetByDate(DateOnly date)
+    {
+        var appointments = await _unitOfWork.Appointment.getByDate(date);
+        var appointmentsDto = _mapper.Map<List<AppointmentListDto>>(appointments);
+        return appointmentsDto;
+    }
 }

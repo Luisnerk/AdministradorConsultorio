@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { AppointmentListModel } from '../_models/appointment-list-model';
@@ -14,5 +14,10 @@ export class AppointmentService {
 
   getAppointments(): Observable<AppointmentListModel[]> {
     return this.http.get<AppointmentListModel[]>(this.baseUrl + "Appointment/all");
+  }
+
+  getByDate(date: string): Observable<AppointmentListModel[]>{
+    let params = new HttpParams().set("date", date);
+    return this.http.get<AppointmentListModel[]>(this.baseUrl + "Appointment/byDate", {params: params})
   }
 }

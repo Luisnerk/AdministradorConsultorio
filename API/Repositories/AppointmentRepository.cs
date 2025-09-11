@@ -20,6 +20,14 @@ public class AppointmentRepository : GenericRepository<Appointment>, IAppointmen
              
     }
 
+    public async Task<IEnumerable<Appointment>> getByDate(DateOnly date)
+    {
+        return await _context.Appointment
+                                .Where(p => DateOnly.FromDateTime(p.DateAndTime) == date)
+                                .Include(p => p.Patient)
+                                .ToListAsync();
+    }
+
     public override async Task<Appointment> GetById(int id)
     {
         return await _context.Appointment

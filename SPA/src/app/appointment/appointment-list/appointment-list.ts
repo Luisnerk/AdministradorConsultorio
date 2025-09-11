@@ -3,25 +3,32 @@ import { AppointmentContainer } from "../appointment-container/appointment-conta
 import { AppointmentService } from '../../_services/appointment-service';
 import { AppointmentListModel } from '../../_models/appointment-list-model';
 import { OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-appointment-list-container',
-  imports: [AppointmentContainer],
+  imports: [AppointmentContainer, FormsModule],
   templateUrl: './appointment-list.html',
   styleUrl: './appointment-list.css'
 })
 export class AppointmentList {
   appointments: AppointmentListModel[] = [];
+  model: any = {};
 
-  constructor (private appointmentService: AppointmentService) {}
+  constructor (private appointmentService: AppointmentService, private fb: FormBuilder) {}
 
   ngOnInit() {
+    const currentDate = new Date();
+    const currentDateStr = currentDate.toISOString().slice(0, 10);
+    this.model.date = currentDateStr;
     this.loadAppointments();
   }
 
   loadAppointments() {
-    console.log("asirwasd")
-    this.appointmentService.getAppointments().subscribe({
+    // this.appointmentService.getAppointments().subscribe({
+    //   next: response => this.appointments = response,
+    // })
+    this.appointmentService.getByDate(this.model.date).subscribe({
       next: response => this.appointments = response,
     })
   }
