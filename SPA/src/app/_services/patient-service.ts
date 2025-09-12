@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Patient } from '../_models/patient';
 import { environment } from '../../environments/environment.development';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -29,6 +29,11 @@ export class PatientService {
 
   getPatients(): Observable<Patient[]> {
     return this.http.get<Patient[]>(this.baseUrl + "Patient/all");
+  }
+
+  getPatientsByName(name: string): Observable<Patient[]> {
+    const params = new HttpParams().set("name", name);
+    return this.http.get<Patient[]>(this.baseUrl + "Patient/byName", {params: params})
   }
 
   updatePatient(model: any): Observable<any> {

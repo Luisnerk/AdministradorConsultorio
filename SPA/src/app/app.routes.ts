@@ -14,6 +14,7 @@ export const routes: Routes = [
     // },
     {path: "appointments", component: AppointmentList},
     {path: "patients", component: PatientList},
+    {path: "patients/:name", component: PatientList},
     {path: "patient/:id", component: PatientDetails},
     {path: "prueba", component: Prueba}
 ];

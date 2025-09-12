@@ -16,12 +16,12 @@ export class PatientDetails {
   editMode: boolean = false;
   id: number = 0;
   patient!: Patient;
+  
+  constructor (private route: ActivatedRoute, private patientService: PatientService) {}
 
   ngOnInit(): void {
     this.loadPatient();
   }
-
-  constructor (private route: ActivatedRoute, private patientService: PatientService) {}
 
   loadPatient() {
     const paramId = this.route.snapshot.paramMap.get('id');

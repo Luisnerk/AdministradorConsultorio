@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 
 export class Nav {
   model: any = {};
+  patientModel: any ={}
 
   constructor (public accountService: AccountService, private router: Router, private toastr: ToastrService) {}
 
@@ -35,5 +36,10 @@ export class Nav {
   logout() {
     this.accountService.logout();
     this.router.navigateByUrl("/");
+  }
+
+  searchPatient() {
+    this.patientModel.name ? this.router.navigate(["/patients", this.patientModel.name])
+                            : this.router.navigate(["/patients"]);
   }
 }

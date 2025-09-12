@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using API.Data;
+
 using API.Dto;
 using API.Entities;
 using API.Interfaces;
@@ -24,7 +20,7 @@ public class PatientController : BaseApiController
         _unitOfWork.SaveAsync();
         return patient;
     }
-    [Authorize]
+    // [Authorize]
     [HttpGet("all")]
     public async Task<IEnumerable<PatientDto>> GetAll()
     {
@@ -39,6 +35,14 @@ public class PatientController : BaseApiController
         var patient = await _unitOfWork.Patients.GetById(id);
         var patientDto = _mapper.Map<PatientDto>(patient);
         return patientDto;
+    }
+
+    [HttpGet("byName")]
+    public async Task<ActionResult<List<PatientDto>>> GetByName(string name)
+    {
+        var patients = await _unitOfWork.Patients.GetByName(name);
+        var patientsDto = _mapper.Map<List<PatientDto>>(patients);
+        return patientsDto;
     }
 
     [HttpPatch]

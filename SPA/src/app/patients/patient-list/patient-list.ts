@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '../../_models/patient';
 import { PatientService } from '../../_services/patient-service';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PatientModal } from "../patient-modal/patient-modal";
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-patient-list',
@@ -13,12 +14,17 @@ import { PatientModal } from "../patient-modal/patient-modal";
 })
 
 export class PatientList implements OnInit{
-  patients: Patient[] = []
+  patients: Patient[] = [];
+  nameSearch: string | null = null;
 
-  constructor(private patientService: PatientService, private router: Router){}
+  constructor(private patientService: PatientService, private router: Router, private route: ActivatedRoute){}
 
   ngOnInit(): void {
-    this.loadPatients();
+    this.route.params.subscribe(params => {
+      this.nameSearch = params["name"];
+      this.nameSearch ? this.loadPatientsByName()
+                      : this.loadPatients();
+    })
     this.patientService.formSubmit$.subscribe(() => this.loadPatients());
   }
 
@@ -32,5 +38,13 @@ export class PatientList implements OnInit{
         this.patients = response;
       }
     });
+  }
+
+  loadPatientsByName() {
+    this.patientService.getPatientsByName(this.nameSearch!).subscribe({
+      next: respone => {
+        this.patients = respone;
+      }
+    })
   }
 }

@@ -25,9 +25,6 @@ export class AppointmentList {
   }
 
   loadAppointments() {
-    // this.appointmentService.getAppointments().subscribe({
-    //   next: response => this.appointments = response,
-    // })
     this.appointmentService.getByDate(this.model.date).subscribe({
       next: response => this.appointments = response,
     })
