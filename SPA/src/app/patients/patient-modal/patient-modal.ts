@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { PatientForm } from "../patient-form/patient-form";
-import { AppointmentForm } from '../../appointment/patient-detail-form/appointment-form';
+import { AppointmentForm } from '../../appointment/appointment-form/appointment-form';
 
 @Component({
   selector: 'app-patient-modal',

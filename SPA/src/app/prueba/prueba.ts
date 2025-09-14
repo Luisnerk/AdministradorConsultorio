@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { AppointmentForm } from "../appointment/patient-detail-form/appointment-form";
+import { AppointmentForm } from "../appointment/appointment-form/appointment-form";
 
 @Component({
   selector: 'app-prueba',
