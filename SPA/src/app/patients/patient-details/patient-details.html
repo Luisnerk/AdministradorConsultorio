@@ -16,7 +16,7 @@
                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#miModal">Agendar Cita</button>
                     <button class="btn btn-danger text-end" (click)="deletePatient()">Eliminar</button>
                 </div>
-                <app-patient-modal [modalForm]="modalForm"></app-patient-modal>
+                <app-patient-modal [modalForm]="modalForm" [patientInput]="patient"></app-patient-modal>
             }
             @else {
                 <app-patient-update-form [patient]="patient" (toggleEdit)="changeMode()" (reloadPatient)="loadPatient()"/>

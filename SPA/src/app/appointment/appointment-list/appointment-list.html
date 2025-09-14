@@ -1,5 +1,6 @@
 <div class="center">
     <input type="date" class="form-control" style="width: 20%;"[(ngModel)]="model.date" (change)="loadAppointments()">
+    <button type="button" class="btn btn-primary ml" data-bs-toggle="modal" data-bs-target="#miModal">Agendar Cita</button>
 </div>
 <div class="center appointment-list-container">
     <div style="min-width: 100%;">
@@ -8,3 +9,5 @@
         }
     </div>
 </div>
+
+<app-patient-modal [modalForm]="modalForm" (formSubmit)="loadAppointments()"></app-patient-modal>

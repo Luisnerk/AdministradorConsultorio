@@ -1,6 +1,7 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { PatientForm } from "../patient-form/patient-form";
 import { AppointmentForm } from '../../appointment/appointment-form/appointment-form';
+import { Patient } from '../../_models/patient';
 
 @Component({
   selector: 'app-patient-modal',
@@ -10,7 +11,9 @@ import { AppointmentForm } from '../../appointment/appointment-form/appointment-
 })
 export class PatientModal {
   @ViewChild(PatientForm) formComponent!: PatientForm;
+  @Output() formSubmit = new EventEmitter();
   @Input() modalForm: string = "";
+  @Input() patientInput: Patient | null = null;
   modalTitle: string = "";
 
   ngOnInit() {
@@ -19,6 +22,10 @@ export class PatientModal {
     } else {
       this.modalTitle = "Agregar paciente"
     }
+  }
+
+  formSubmitted() {
+    this.formSubmit.emit();
   }
 
   resetForm() {

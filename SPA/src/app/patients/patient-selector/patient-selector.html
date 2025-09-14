@@ -1,0 +1,4 @@
+<div>
+    <ng-select class="ng-selectv" (search)="loadPatients($event.term)" [items]="patients" bindLabel="name" bindValue="id" [(ngModel)]="id" (ngModelChange)="setId()">
+    </ng-select>
+</div>

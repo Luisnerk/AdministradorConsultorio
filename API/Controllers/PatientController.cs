@@ -40,6 +40,11 @@ public class PatientController : BaseApiController
     [HttpGet("byName")]
     public async Task<ActionResult<List<PatientDto>>> GetByName(string name)
     {
+        if (name == null)
+        {
+            var patientsDtoEmpty = new List<PatientDto>();
+            return patientsDtoEmpty;
+        }
         var patients = await _unitOfWork.Patients.GetByName(name);
         var patientsDto = _mapper.Map<List<PatientDto>>(patients);
         return patientsDto;
