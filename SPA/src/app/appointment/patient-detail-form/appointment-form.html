@@ -1,0 +1,26 @@
+<form [formGroup]="formGroup" (ngSubmit)="registerAppointment()">
+    <fieldset>
+        <div>
+            <label for="dateAndTime" class="form-label">Fecha y Hora</label>
+            <input type="datetime-local" class="form-control" id="dateAndTime" formControlName="dateAndTime">
+        </div>
+        <div>
+            <label for="durationMinutes" class="form-label mt-4">Duración (minutos)</label>
+            <input type="number" min="0" max="300"  list="durationList" class="form-control" id="durationMinutes" formControlName="durationMinutes">
+        </div>
+        <br>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" data-bs-toggle="modal">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetForm()">Cancelar</button>
+        </div>
+    </fieldset>
+</form>
+
+<datalist id="durationList">
+    <option value="30"></option>
+    <option value="60"></option>
+    <option value="90"></option>
+    <option value="120"></option>
+    <option value="150"></option>
+    <option value="180"></option>
+</datalist>

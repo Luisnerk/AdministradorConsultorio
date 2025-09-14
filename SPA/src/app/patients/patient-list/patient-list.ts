@@ -16,6 +16,7 @@ import { HttpParams } from '@angular/common/http';
 export class PatientList implements OnInit{
   patients: Patient[] = [];
   nameSearch: string | null = null;
+  modalForm: string = "patient";
 
   constructor(private patientService: PatientService, private router: Router, private route: ActivatedRoute){}
 

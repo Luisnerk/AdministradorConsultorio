@@ -4,15 +4,17 @@ import { PatientService } from '../../_services/patient-service';
 import { Patient } from '../../_models/patient';
 import { PatientUpdateForm } from "../patient-update-form/patient-update-form";
 import { firstValueFrom } from 'rxjs';
+import { PatientModal } from "../patient-modal/patient-modal";
 
 @Component({
   selector: 'app-patient-details',
-  imports: [ PatientUpdateForm],
+  imports: [PatientUpdateForm, PatientModal],
   templateUrl: './patient-details.html',
   styleUrl: './patient-details.css'
 })
 export class PatientDetails {
   private router = inject(Router);
+  modalForm: string = "appointment"
   editMode: boolean = false;
   id: number = 0;
   patient!: Patient;
