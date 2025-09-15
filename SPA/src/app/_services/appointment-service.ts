@@ -1,8 +1,8 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { AppointmentListModel } from '../_models/appointment-list-model';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Appointment } from '../_models/appointment';
 
 @Injectable({
@@ -11,7 +11,14 @@ import { Appointment } from '../_models/appointment';
 export class AppointmentService {
   private baseUrl: string = environment.apiUrl;
 
+  private reloadListSubject = new Subject<void>();
+  reloadList$ = this.reloadListSubject.asObservable();
+
   constructor (private http: HttpClient) {}
+
+  listChange() {
+    this.reloadListSubject.next();
+  }
 
   getAppointments(): Observable<AppointmentListModel[]> {
     return this.http.get<AppointmentListModel[]>(this.baseUrl + "Appointment/all");
@@ -24,5 +31,9 @@ export class AppointmentService {
 
   registerAppointment(model: any) {
     return this.http.post<Appointment>(this.baseUrl + "Appointment/register", model);
+  }
+
+  deleteAppointment(model: any): Observable<HttpResponse<any>> {
+    return this.http.delete<AppointmentListModel>(this.baseUrl + "Appointment/delete", {observe: 'response', body: model})
   }
 }

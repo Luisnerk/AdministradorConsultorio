@@ -11,7 +11,7 @@
       <div class="modal-body">
         @switch (modalForm) {
           @case ("appointment") {
-            <app-appointment-form [patientInput]="patientInput" (formSubmit)="formSubmitted()"></app-appointment-form>
+            <app-appointment-form [patientInput]="patientInput"></app-appointment-form>
           }
           @case ("patient") {
             <app-patient-form></app-patient-form>

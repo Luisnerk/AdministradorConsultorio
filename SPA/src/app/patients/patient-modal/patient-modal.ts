@@ -11,7 +11,6 @@ import { Patient } from '../../_models/patient';
 })
 export class PatientModal {
   @ViewChild(PatientForm) formComponent!: PatientForm;
-  @Output() formSubmit = new EventEmitter();
   @Input() modalForm: string = "";
   @Input() patientInput: Patient | null = null;
   modalTitle: string = "";
@@ -22,10 +21,6 @@ export class PatientModal {
     } else {
       this.modalTitle = "Agregar paciente"
     }
-  }
-
-  formSubmitted() {
-    this.formSubmit.emit();
   }
 
   resetForm() {

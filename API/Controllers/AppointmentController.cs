@@ -35,4 +35,19 @@ public class AppointmentController : BaseApiController
         var appointmentsDto = _mapper.Map<List<AppointmentListDto>>(appointments);
         return appointmentsDto;
     }
+
+    [HttpDelete("delete")]
+    public async Task<ActionResult> ActionResult(AppointmentListDto appointmentDto)
+    {
+        try
+        {
+            Appointment appointment = _mapper.Map<Appointment>(appointmentDto);
+            _unitOfWork.Appointment.Delete(appointment);
+            await _unitOfWork.SaveAsync();
+            return Ok();
+        }
+        catch (Exception) {
+            return BadRequest();
+        }
+    }
 }

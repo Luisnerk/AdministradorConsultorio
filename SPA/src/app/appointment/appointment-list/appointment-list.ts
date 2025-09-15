@@ -23,7 +23,7 @@ export class AppointmentList {
     const currentDate = new Date();
     const currentDateStr = this.getDateString(currentDate);
     this.model.date = currentDateStr;
-    console.log(this.model.date)
+    this.appointmentService.reloadList$.subscribe(() => this.loadAppointments())
     this.loadAppointments();
   }
 

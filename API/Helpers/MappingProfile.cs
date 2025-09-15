@@ -19,7 +19,8 @@ public class MappingProfile : Profile
                     .ForMember(dest => dest.StartTime,
                                 opt => opt.MapFrom(x => x.DateAndTime.ToString("HH:mm")))
                     .ForMember(dest => dest.EndTime,
-                                opt => opt.MapFrom(x => x.DateAndTime.AddMinutes(x.DurationMinutes).ToString("HH:mm")));
+                                opt => opt.MapFrom(x => x.DateAndTime.AddMinutes(x.DurationMinutes).ToString("HH:mm")))
+                    .ReverseMap();
         CreateMap<AppointmentRegisterDto, Appointment>();
     }
 }

@@ -13,7 +13,6 @@ import { Patient } from '../../_models/patient';
   styleUrl: './appointment-form.css'
 })
 export class AppointmentForm {
-  @Output() formSubmit = new EventEmitter();
   @Input() patientInput: Patient | null = null;
   constructor (private fb: FormBuilder, private appointmentService: AppointmentService, private toastr: ToastrService) {}
 
@@ -21,7 +20,6 @@ export class AppointmentForm {
 
   ngOnInit() {
     this.initForm();
-    console.log(this.formGroup.value)
   }
 
   initForm() {
@@ -39,7 +37,7 @@ export class AppointmentForm {
     if (this.formGroup.valid){
       const values: any = {...this.formGroup.value}
       this.appointmentService.registerAppointment(values).subscribe({
-        next: () => this.formSubmit.emit(0),
+        next: () => this.appointmentService.listChange(),
         error: error => console.log(error)
       });
     } else {
