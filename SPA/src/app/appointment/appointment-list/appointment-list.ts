@@ -21,13 +21,19 @@ export class AppointmentList {
 
   ngOnInit() {
     const currentDate = new Date();
-    const currentDateStr = currentDate.toISOString().slice(0, 10);
+    const currentDateStr = this.getDateString(currentDate);
     this.model.date = currentDateStr;
+    console.log(this.model.date)
     this.loadAppointments();
   }
 
+  getDateString(date: Date): string {
+    const month = (date.getMonth()+1).toString().padStart(2,"0")
+    const dateString = date.getFullYear() + "-" + month + "-" + date.getDate();
+    return dateString;
+  }
+
   loadAppointments() {
-    console.log("load")
     this.appointmentService.getByDate(this.model.date).subscribe({
       next: response => this.appointments = response,
     })

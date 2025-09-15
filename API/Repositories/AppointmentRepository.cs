@@ -24,6 +24,7 @@ public class AppointmentRepository : GenericRepository<Appointment>, IAppointmen
     {
         return await _context.Appointment
                                 .Where(p => DateOnly.FromDateTime(p.DateAndTime) == date)
+                                .OrderBy(p => p.DateAndTime)
                                 .Include(p => p.Patient)
                                 .ToListAsync();
     }
