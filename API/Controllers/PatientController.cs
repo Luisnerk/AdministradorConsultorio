@@ -1,6 +1,9 @@
 
+using System.Text.Json;
 using API.Dto;
 using API.Entities;
+using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -11,6 +14,14 @@ namespace API.Controllers;
 public class PatientController : BaseApiController
 {
     public PatientController(IMapper mapper, IUnitOfWork unitOfWork) : base(mapper, unitOfWork) { }
+
+    [HttpGet("list")]
+    public async Task<ActionResult<PagedList<PatientDto>>> GetPatients([FromQuery] UserParams userParams)
+    {
+        var patients = await _unitOfWork.Patients.GetPaged(userParams, _mapper);
+        Response.AddPaginationHeader(new PaginationHeader(patients.CurrentPage, patients.PageSize, patients.Count, patients.TotalPages));
+        return Ok(patients);
+    }
 
     [HttpPost("add")]
     public Patient AddPatient(PatientAddUpdateDto patientDto)
