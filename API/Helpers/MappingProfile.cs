@@ -16,6 +16,8 @@ public class MappingProfile : Profile
                                 opt => opt.MapFrom(x => DateTime.Now.Year - x.DateOfBirth.ToDateTime(TimeOnly.MinValue).Year));
         CreateMap<Appointment, AppointmentDto>();
         CreateMap<Appointment, AppointmentListDto>()
+                    .ForMember(dest => dest.Date,
+                                opt => opt.MapFrom(x => x.DateAndTime.ToString("yyyy-MM-dd")))
                     .ForMember(dest => dest.StartTime,
                                 opt => opt.MapFrom(x => x.DateAndTime.ToString("HH:mm")))
                     .ForMember(dest => dest.EndTime,

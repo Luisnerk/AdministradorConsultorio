@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment.development';
 import { AppointmentListModel } from '../_models/appointment-list-model';
 import { Observable, Subject } from 'rxjs';
 import { Appointment } from '../_models/appointment';
+import { Patient } from '../_models/patient';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,11 @@ export class AppointmentService {
 
   getAppointments(): Observable<AppointmentListModel[]> {
     return this.http.get<AppointmentListModel[]>(this.baseUrl + "Appointment/all");
+  }
+
+  getUpcomming(id: number): Observable<AppointmentListModel[]> {
+    const params = new HttpParams().set("id", id);
+    return this.http.get<AppointmentListModel[]>(this.baseUrl + "Appointment/getUpcoming", {params: params});
   }
 
   getByDate(date: string): Observable<AppointmentListModel[]>{

@@ -5,6 +5,8 @@ import { Patient } from '../../_models/patient';
 import { PatientUpdateForm } from "../patient-update-form/patient-update-form";
 import { firstValueFrom } from 'rxjs';
 import { PatientModal } from "../patient-modal/patient-modal";
+import { AppointmentService } from '../../_services/appointment-service';
+import { AppointmentListModel } from '../../_models/appointment-list-model';
 
 @Component({
   selector: 'app-patient-details',
@@ -18,11 +20,14 @@ export class PatientDetails {
   editMode: boolean = false;
   id: number = 0;
   patient!: Patient;
+  appointments: AppointmentListModel[] = [];
   
-  constructor (private route: ActivatedRoute, private patientService: PatientService) {}
+  constructor (private route: ActivatedRoute, private patientService: PatientService, private appointmentService: AppointmentService) {}
 
   ngOnInit(): void {
     this.loadPatient();
+    this.loadUpcommingAppointments();
+    this.appointmentService.reloadList$.subscribe(() => this.loadUpcommingAppointments());
   }
 
   loadPatient() {
@@ -30,6 +35,13 @@ export class PatientDetails {
     paramId ? this.id = +paramId : this.id = 0;
     this.patientService.getPatient(this.id).subscribe({
       next: response => this.patient = response
+    });
+  }
+
+  loadUpcommingAppointments() {
+    const patientId = +this.id;
+    this.appointmentService.getUpcomming(patientId).subscribe({
+      next: response => this.appointments = response,
     });
   }
 

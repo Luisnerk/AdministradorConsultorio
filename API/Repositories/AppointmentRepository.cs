@@ -36,4 +36,13 @@ public class AppointmentRepository : GenericRepository<Appointment>, IAppointmen
                 .FirstOrDefaultAsync(p => p.Id == id);
         
     }
+
+    public async Task<IEnumerable<Appointment>> getUpcoming(int patientId)
+    {
+        return await _context.Appointment
+                                .Where(p => p.DateAndTime.Date >= DateTime.Now.Date
+                                            && p.PatientId == patientId)
+                                .Include(p => p.Patient)
+                                .ToListAsync();
+    }
 }

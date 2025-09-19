@@ -1,6 +1,6 @@
 
-<div class="center">
-    <div class="card" style="padding: 15px; padding-left: 30px; padding-right: 30px;">
+<div class="center flex-container">
+    <div class="card details-container" style="padding: 15px; padding-left: 30px; padding-right: 30px;">
         <div class="card-body">
             <h3 class="card-title text-center">{{patient.name}}</h3>
             @if (!editMode) {
@@ -21,6 +21,22 @@
             @else {
                 <app-patient-update-form [patient]="patient" (toggleEdit)="changeMode()" (reloadPatient)="loadPatient()"/>
             }
+        </div>
+    </div>
+    <div class="card appointment-container">
+        <div class="card-body">
+            <div class="title">
+                <h4>Próximas citas</h4>
+            </div>
+            <hr>
+            <div>
+                @for (appointment of appointments; track appointment.id) {
+                    <div class="appointment">
+                        <div class="date">{{appointment.date}}</div>
+                        <div>{{appointment.startTime}} - {{appointment.endTime}}</div>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </div>

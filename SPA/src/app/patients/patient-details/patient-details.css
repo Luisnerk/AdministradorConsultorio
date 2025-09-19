@@ -1,8 +1,42 @@
+hr {
+    margin: 1rem 0rem;
+    border: 0;
+    border-top: 1px solid gray;
+}
+
 .btn {
     margin-left: 10px;
 }
 
-.card {
-    min-width: 80%;
-    min-height: 90%;
+.flex-container {
+    flex: 1 1 0px;
+}
+
+.details-container {
+    min-width: 60%;
+    min-height: 80vh;
+}
+
+.title {
+    text-align: center;
+}
+
+.date {
+    font-size: large;
+    font-weight: bold;
+}
+
+.appointment-container {
+    height: 80vh;
+    margin-left: 20px;
+    border-color: gray;
+    min-width: 20%;
+    max-width: 20%;
+}
+
+.appointment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
 }
