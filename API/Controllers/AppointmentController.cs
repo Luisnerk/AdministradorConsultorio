@@ -37,7 +37,7 @@ public class AppointmentController : BaseApiController
     }
 
     [HttpGet("getUpcoming")]
-    public async Task<ActionResult<List<AppointmentListDto>>> getUpcoming(int id)
+    public async Task<ActionResult<List<AppointmentListDto>>> getUpcoming([FromQuery]int id)
     {
         var appointments = await _unitOfWork.Appointment.getUpcoming(id);
         var appointmentsDto = _mapper.Map<List<AppointmentListDto>>(appointments);

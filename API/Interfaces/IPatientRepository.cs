@@ -10,4 +10,5 @@ public interface IPatientRepository : IGenericRepository<Patient>
 {
     public Task<IEnumerable<Patient>> GetByName(string name);
     public Task<PagedList<PatientDto>> GetPaged(UserParams userParams, IMapper _mapper);
+    public Task<IEnumerable<Patient>> GetByNameLimit(string name, int limit);
 }

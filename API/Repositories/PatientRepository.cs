@@ -21,6 +21,14 @@ public class PatientRepository : GenericRepository<Patient>, IPatientRepository
                                 .ToListAsync();
     }
 
+    public async Task<IEnumerable<Patient>> GetByNameLimit(string name, int limit)
+    {
+        return await _context.Patients
+                                .Where(p => p.Name.ToLower().Contains(name.ToLower()))
+                                .Take(limit)
+                                .ToListAsync();
+    }
+
     public async Task<PagedList<PatientDto>> GetPaged(UserParams userParams, IMapper _mapper)
     {
         var query = _context.Patients.AsQueryable();

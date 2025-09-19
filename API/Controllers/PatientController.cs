@@ -61,6 +61,19 @@ public class PatientController : BaseApiController
         return patientsDto;
     }
 
+    [HttpGet("byNameLimit")]
+    public async Task<ActionResult<List<PatientDto>>> GetByNameLimit([FromQuery] string name, [FromQuery] int limit = 5)
+    {
+        if (name == null || limit == 0)
+        {
+            var emptyPatients = new List<PatientDto>();
+            return emptyPatients;
+        }
+        var patients = await _unitOfWork.Patients.GetByNameLimit(name, limit);
+        var patientsDto = _mapper.Map<List<PatientDto>>(patients);
+        return patientsDto;
+    }
+
     [HttpPatch]
     public void Update(PatientAddUpdateDto patientUpdate)
     {
