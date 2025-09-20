@@ -3,3 +3,12 @@
 <app-appointment-form></app-appointment-form>
 
 <app-patient-selector></app-patient-selector>
+@if (!patients) {
+    no hay pacientes :(
+}
+@else {
+    si hay?
+}
+@for (patient of patients; track patient.id) {
+    <div>{{patient.name}}</div>
+}
