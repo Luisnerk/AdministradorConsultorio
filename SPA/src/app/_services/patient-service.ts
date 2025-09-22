@@ -48,6 +48,11 @@ export class PatientService {
     const params = new HttpParams().set("name", name);
     return this.http.get<Patient[]>(this.baseUrl + "Patient/byName", {params: params});
   }
+  
+  getPatientsByNameLimit(name: string, limit: number = 5): Observable<Patient[]> {
+    const params = new HttpParams().set("name", name).set("limit", limit);
+    return this.http.get<Patient[]>(this.baseUrl + "Patient/byNameLimit", {params: params});
+  }
 
   updatePatient(model: any): Observable<any> {
     return this.http.patch(this.baseUrl + "Patient", model, {observe: 'response'});

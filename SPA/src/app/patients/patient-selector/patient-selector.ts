@@ -20,7 +20,7 @@ export class PatientSelector {
   loadPatients(name: string) {
     name = name.trim();
     name
-        ? this.patientservice.getPatientsByName(name).subscribe({
+        ? this.patientservice.getPatientsByNameLimit(name).subscribe({
             next: response => this.patients = response
           })
         : console.log("Blank Search");
