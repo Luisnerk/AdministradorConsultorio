@@ -23,6 +23,18 @@ public class PatientController : BaseApiController
         return Ok(patients);
     }
 
+    [HttpGet("listByName")]
+    public async Task<ActionResult<PagedList<PatientDto>>> GetPatientsByName([FromQuery] UserParams userParams, [FromQuery] string name)
+    {
+        if (name == null)
+        {
+            name = "";
+        }
+        var patients = await _unitOfWork.Patients.GetByNamePaged(name, userParams, _mapper);
+        Response.AddPaginationHeader(new PaginationHeader(patients.CurrentPage, patients.PageSize, patients.Count, patients.TotalPages));
+        return Ok(patients);
+    }
+
     [HttpPost("add")]
     public Patient AddPatient(PatientAddUpdateDto patientDto)
     {

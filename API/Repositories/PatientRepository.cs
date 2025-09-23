@@ -29,6 +29,13 @@ public class PatientRepository : GenericRepository<Patient>, IPatientRepository
                                 .ToListAsync();
     }
 
+    public async Task<PagedList<PatientDto>> GetByNamePaged(string name, UserParams userParams, IMapper _mapper)
+    {
+        var query = _context.Patients.Where(p => p.Name.ToLower().Contains(name.ToLower())).AsQueryable();
+        var res = await PagedList<PatientDto>.CreateAsync(query.AsNoTracking().ProjectTo<PatientDto>(_mapper.ConfigurationProvider), userParams.pageNumber, userParams.PageSize);
+        return res;
+    }
+
     public async Task<PagedList<PatientDto>> GetPaged(UserParams userParams, IMapper _mapper)
     {
         var query = _context.Patients.AsQueryable();
