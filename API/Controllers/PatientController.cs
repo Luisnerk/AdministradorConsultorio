@@ -19,7 +19,7 @@ public class PatientController : BaseApiController
     public async Task<ActionResult<PagedList<PatientDto>>> GetPatients([FromQuery] UserParams userParams)
     {
         var patients = await _unitOfWork.Patients.GetPaged(userParams, _mapper);
-        Response.AddPaginationHeader(new PaginationHeader(patients.CurrentPage, patients.PageSize, patients.Count, patients.TotalPages));
+        Response.AddPaginationHeader(new PaginationHeader(patients.CurrentPage, patients.PageSize, patients.TotalCount, patients.TotalPages));
         return Ok(patients);
     }
 
@@ -31,7 +31,7 @@ public class PatientController : BaseApiController
             name = "";
         }
         var patients = await _unitOfWork.Patients.GetByNamePaged(name, userParams, _mapper);
-        Response.AddPaginationHeader(new PaginationHeader(patients.CurrentPage, patients.PageSize, patients.Count, patients.TotalPages));
+        Response.AddPaginationHeader(new PaginationHeader(patients.CurrentPage, patients.PageSize, patients.TotalCount, patients.TotalPages));
         return Ok(patients);
     }
 

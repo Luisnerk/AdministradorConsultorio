@@ -48,6 +48,14 @@ export class PatientService {
     const params = new HttpParams().set("name", name);
     return this.http.get<Patient[]>(this.baseUrl + "Patient/byName", {params: params});
   }
+
+  getPaginatedPatientsByName(name: string, userParams: UserParams): Observable<PaginatedResult<Patient[]>> {
+    const url = this.baseUrl + "Patient/listByName";
+    const params = new HttpParams().set("name", name)
+                                    .set("pageNumber", userParams.pageNumber)
+                                    .set("pageSize", userParams.pageSize);
+    return this.getPaginatedResults<Patient[]>(url, params);
+  }
   
   getPatientsByNameLimit(name: string, limit: number = 5): Observable<Patient[]> {
     const params = new HttpParams().set("name", name).set("limit", limit);

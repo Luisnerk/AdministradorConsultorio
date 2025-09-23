@@ -17,7 +17,7 @@ public class PagedList<T> : List<T>
     public int CurrentPage { get; set; }
     public int TotalPages { get; set; }
     public int PageSize { get; set; }
-    public int TotalCount;
+    public int TotalCount { get; set; }
 
     public static async Task<PagedList<T>> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize)
     {

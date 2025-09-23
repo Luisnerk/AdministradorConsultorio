@@ -4,7 +4,6 @@ import { PatientService } from '../../_services/patient-service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PatientModal } from "../patient-modal/patient-modal";
-import { HttpParams } from '@angular/common/http';
 import { Pagination } from '../../_models/pagination';
 import { UserParams } from '../../_models/user-params';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
@@ -49,16 +48,18 @@ export class PatientList implements OnInit{
         if (response.result && response.pagination){
           this.patients = response.result;
           this.pagination = response.pagination;
-          this.pagination.totalItems = this.pagination.itemsPerPage * this.pagination.totalPages;
         }
       },
     })
   }
 
   loadPatientsByName() {
-    this.patientService.getPatientsByName(this.nameSearch!).subscribe({
+    this.patientService.getPaginatedPatientsByName(this.nameSearch!, this.userParams!).subscribe({
       next: response => {
-        this.patients = response;
+        if (response.result && response.pagination){
+          this.patients = response.result;
+          this.pagination = response.pagination;
+        }
       }
     })
   }
@@ -66,7 +67,8 @@ export class PatientList implements OnInit{
   pageChanged(event: any) {
     if (this.userParams && this.userParams.pageNumber !== event.page){
       this.userParams.pageNumber = event.page;
-      this.loadPatients();
+      this.nameSearch ? this.loadPatientsByName()
+                      : this.loadPatients();
     }
   }
 }
