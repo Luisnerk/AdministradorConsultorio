@@ -21,7 +21,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
             toastr.error("Debes iniciar sesión", "Error de autenticación");
             break;
           default:
-            toastr.error(error.message, error.status.toString());
+            toastr.error("Ha ocurrido un error inesperado", "Error");
             break;
         }
       }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, Observable, Observer } from 'rxjs';
 import { User } from '../_models/user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +34,17 @@ export class AccountService {
   setCurrentUser(user: User) {
     localStorage.setItem("user", JSON.stringify(user));
     this.currentUserSource.next(user);
+  }
+
+  updateUser(model: any): Observable<void> {
+    console.log("fun")
+    return this.http.patch<User>(this.baseUrl + "Account", model).pipe(
+      map((response: User) => {
+        const user = response;
+        if(user){
+          this.setCurrentUser(response);
+        }
+      })
+    );
   }
 }

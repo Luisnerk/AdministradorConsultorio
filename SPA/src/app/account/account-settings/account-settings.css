@@ -1,0 +1,18 @@
+.container {
+    border: 1px rgb(166, 166, 166) solid;
+    border-radius: 10px;
+    padding:20px;
+    height: max-content;
+    width: 70vw;
+}
+
+.btn-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+h4 {
+    text-align: center;
+}
