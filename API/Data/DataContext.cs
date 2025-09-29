@@ -11,6 +11,13 @@ public class DataContext : DbContext
 
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<AppUser>()
+                            .HasIndex(u => u.Username)
+                            .IsUnique();
+    }
+
     public DbSet<AppUser> AppUsers { get; set; }
     public DbSet<Patient> Patients { get; set; }
     public DbSet<Appointment> Appointment { get; set; }

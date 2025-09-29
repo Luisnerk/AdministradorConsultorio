@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Win32;
 
 namespace API.Controllers;
 
@@ -28,6 +29,11 @@ public class AccountController : BaseApiController
     [HttpPost("register")]
     public async Task<ActionResult<AppUserDto>> Register(RegisterDto register)
     {
+        var userExist = await _unitOfWork.Users.SingleOrDefaultAsync(u => u.Username.ToLower().Equals(register.Username.ToLower()));
+        if (userExist != null)
+        {
+            return BadRequest("Nombre de usuario ya existente");
+        }
         AppUser user = _mapper.Map<AppUser>(register);
         using var hmac = new HMACSHA512();
 
