@@ -1,5 +1,3 @@
-
-using System.Text.Json;
 using API.Dto;
 using API.Entities;
 using API.Extensions;
@@ -11,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
+[Authorize]
 public class PatientController : BaseApiController
 {
     public PatientController(IMapper mapper, IUnitOfWork unitOfWork) : base(mapper, unitOfWork) { }

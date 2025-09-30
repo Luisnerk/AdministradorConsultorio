@@ -3,10 +3,12 @@ using API.Dto;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
+[Authorize]
 public class AppointmentController : BaseApiController
 {
     public AppointmentController(IMapper mapper, IUnitOfWork unitOfWork) : base(mapper, unitOfWork) { }
@@ -37,7 +39,7 @@ public class AppointmentController : BaseApiController
     }
 
     [HttpGet("getUpcoming")]
-    public async Task<ActionResult<List<AppointmentListDto>>> getUpcoming([FromQuery]int id)
+    public async Task<ActionResult<List<AppointmentListDto>>> getUpcoming([FromQuery] int id)
     {
         var appointments = await _unitOfWork.Appointment.getUpcoming(id);
         var appointmentsDto = _mapper.Map<List<AppointmentListDto>>(appointments);
@@ -54,7 +56,8 @@ public class AppointmentController : BaseApiController
             await _unitOfWork.SaveAsync();
             return Ok();
         }
-        catch (Exception) {
+        catch (Exception)
+        {
             return BadRequest();
         }
     }

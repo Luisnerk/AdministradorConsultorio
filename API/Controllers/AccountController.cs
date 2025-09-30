@@ -1,20 +1,12 @@
-
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using API.Data;
 using API.Dto;
 using API.Entities;
 using API.Interfaces;
-using API.Services;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.Win32;
 
 namespace API.Controllers;
 
@@ -26,6 +18,7 @@ public class AccountController : BaseApiController
         _tokenService = tokenService;
     }
 
+    [Authorize]
     [HttpPost("register")]
     public async Task<ActionResult<AppUserDto>> Register(RegisterDto register)
     {
@@ -68,6 +61,7 @@ public class AccountController : BaseApiController
         };
     }
 
+    [Authorize]
     [HttpPatch]
     public async Task<ActionResult<AppUserDto>> Update(AppUserUpdateDto appUserUpdateDto)
     {
